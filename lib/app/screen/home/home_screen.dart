@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
 import '../../../core/widget/custom_error_widget.dart';
 import '../../../core/widget/custom_loading_indicator.dart';
 import '../../model/movie.dart';
@@ -20,7 +21,7 @@ class HomePageState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<HomeCubit>(context).fetchMovies();
+    //BlocProvider.of<HomeCubit>(context).fetchMovies();
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -49,7 +50,12 @@ class HomePageState extends State<HomeScreen> {
               return results.isNotEmpty
                   ? Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: SingleChildScrollView(
+                      child: RefreshIndicator(
+                        color: Colors.red,
+                        onRefresh: () async {
+                          context.read<HomeCubit>().fetchMovies();
+                        },
+                        child: SingleChildScrollView(
                         child: StaggeredGrid.count(
                           crossAxisCount: constraints.maxWidth > 900 ? 5 : 3,
                           mainAxisSpacing: 0,
@@ -59,7 +65,7 @@ class HomePageState extends State<HomeScreen> {
                               .toList(),
                         ),
                       ),
-                    )
+                    ),)
                   : Center(child: Text("Data is empty!"));
             },
           ),
@@ -72,11 +78,7 @@ class HomePageState extends State<HomeScreen> {
     return MovieListItem(
       movie: movie,
       onTap: () {
-        /*Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => MovieDetailPage(movie: movie),
-          ),
-        );  */
+        context.push('/detail', extra: movie);
       },
     );
   }

@@ -10,8 +10,8 @@ part 'search_result.g.dart';
 abstract class SearchResult with _$SearchResult {
   const factory SearchResult({
     required int page,
-    required int totalPages,
-    required int totalResults,
+    int? totalPages,
+    int? totalResults,
     required List<Movie> results,
   }) = _SearchResult;
 

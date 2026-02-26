@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import '../config/app_constants.dart';
 
+@singleton
 class ApiService {
   final _basUrl = baseURL;
   final _apiKey = apiKEY;

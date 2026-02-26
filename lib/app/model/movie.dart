@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'movie.freezed.dart';
+
 part 'movie.g.dart';
 
 @freezed
@@ -9,18 +10,18 @@ abstract class Movie with _$Movie {
     required int id,
     required String title,
     bool? adult,
-    String? backdropPath,
-    List<int>? genreIds,
-    String? originalLanguage,
-    String? originalTitle,
+    @JsonKey(name: "backdrop_path") String? backdropPath,
+    @JsonKey(name: "genre_ids") List<int>? genreIds,
+    @JsonKey(name: "original_language") String? originalLanguage,
+    @JsonKey(name: "original_title") String? originalTitle,
     String? overview,
     double? popularity,
-    String? posterPath,
-    String? releaseDate,
+    @JsonKey(name: "poster_path") String? posterPath,
+    @JsonKey(name: "release_date") String? releaseDate,
     bool? video,
-    double? voteAverage,
-    int? voteCount,
+    @JsonKey(name: "vote_average") double? voteAverage,
+    @JsonKey(name: "vote_count") int? voteCount,
   }) = _Movie;
 
-  factory Movie.fromJson(Map<String,dynamic> json) => _$MovieFromJson(json);
+  factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
 }

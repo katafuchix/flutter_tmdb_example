@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SearchResult {
 
- int get page; int get totalPages; int get totalResults; List<Movie> get results;
+ int get page; int? get totalPages; int? get totalResults; List<Movie> get results;
 /// Create a copy of SearchResult
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $SearchResultCopyWith<$Res>  {
   factory $SearchResultCopyWith(SearchResult value, $Res Function(SearchResult) _then) = _$SearchResultCopyWithImpl;
 @useResult
 $Res call({
- int page, int totalPages, int totalResults, List<Movie> results
+ int page, int? totalPages, int? totalResults, List<Movie> results
 });
 
 
@@ -65,12 +65,12 @@ class _$SearchResultCopyWithImpl<$Res>
 
 /// Create a copy of SearchResult
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? page = null,Object? totalPages = null,Object? totalResults = null,Object? results = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? page = null,Object? totalPages = freezed,Object? totalResults = freezed,Object? results = null,}) {
   return _then(_self.copyWith(
 page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
-as int,totalPages: null == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable
-as int,totalResults: null == totalResults ? _self.totalResults : totalResults // ignore: cast_nullable_to_non_nullable
-as int,results: null == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
+as int,totalPages: freezed == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable
+as int?,totalResults: freezed == totalResults ? _self.totalResults : totalResults // ignore: cast_nullable_to_non_nullable
+as int?,results: null == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
 as List<Movie>,
   ));
 }
@@ -156,7 +156,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int page,  int totalPages,  int totalResults,  List<Movie> results)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int page,  int? totalPages,  int? totalResults,  List<Movie> results)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SearchResult() when $default != null:
 return $default(_that.page,_that.totalPages,_that.totalResults,_that.results);case _:
@@ -177,7 +177,7 @@ return $default(_that.page,_that.totalPages,_that.totalResults,_that.results);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int page,  int totalPages,  int totalResults,  List<Movie> results)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int page,  int? totalPages,  int? totalResults,  List<Movie> results)  $default,) {final _that = this;
 switch (_that) {
 case _SearchResult():
 return $default(_that.page,_that.totalPages,_that.totalResults,_that.results);case _:
@@ -197,7 +197,7 @@ return $default(_that.page,_that.totalPages,_that.totalResults,_that.results);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int page,  int totalPages,  int totalResults,  List<Movie> results)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int page,  int? totalPages,  int? totalResults,  List<Movie> results)?  $default,) {final _that = this;
 switch (_that) {
 case _SearchResult() when $default != null:
 return $default(_that.page,_that.totalPages,_that.totalResults,_that.results);case _:
@@ -212,12 +212,12 @@ return $default(_that.page,_that.totalPages,_that.totalResults,_that.results);ca
 @JsonSerializable()
 
 class _SearchResult implements SearchResult {
-  const _SearchResult({required this.page, required this.totalPages, required this.totalResults, required final  List<Movie> results}): _results = results;
+  const _SearchResult({required this.page, this.totalPages, this.totalResults, required final  List<Movie> results}): _results = results;
   factory _SearchResult.fromJson(Map<String, dynamic> json) => _$SearchResultFromJson(json);
 
 @override final  int page;
-@override final  int totalPages;
-@override final  int totalResults;
+@override final  int? totalPages;
+@override final  int? totalResults;
  final  List<Movie> _results;
 @override List<Movie> get results {
   if (_results is EqualUnmodifiableListView) return _results;
@@ -259,7 +259,7 @@ abstract mixin class _$SearchResultCopyWith<$Res> implements $SearchResultCopyWi
   factory _$SearchResultCopyWith(_SearchResult value, $Res Function(_SearchResult) _then) = __$SearchResultCopyWithImpl;
 @override @useResult
 $Res call({
- int page, int totalPages, int totalResults, List<Movie> results
+ int page, int? totalPages, int? totalResults, List<Movie> results
 });
 
 
@@ -276,12 +276,12 @@ class __$SearchResultCopyWithImpl<$Res>
 
 /// Create a copy of SearchResult
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? page = null,Object? totalPages = null,Object? totalResults = null,Object? results = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? page = null,Object? totalPages = freezed,Object? totalResults = freezed,Object? results = null,}) {
   return _then(_SearchResult(
 page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
-as int,totalPages: null == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable
-as int,totalResults: null == totalResults ? _self.totalResults : totalResults // ignore: cast_nullable_to_non_nullable
-as int,results: null == results ? _self._results : results // ignore: cast_nullable_to_non_nullable
+as int,totalPages: freezed == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable
+as int?,totalResults: freezed == totalResults ? _self.totalResults : totalResults // ignore: cast_nullable_to_non_nullable
+as int?,results: null == results ? _self._results : results // ignore: cast_nullable_to_non_nullable
 as List<Movie>,
   ));
 }

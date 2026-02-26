@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeState {
 
- ScreenState get screen; DialogState get dialog;
+ ScreenState get screen; DialogState get dialog; int get currentPage;
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $HomeStateCopyWith<HomeState> get copyWith => _$HomeStateCopyWithImpl<HomeState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.screen, screen) || other.screen == screen)&&(identical(other.dialog, dialog) || other.dialog == dialog));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.screen, screen) || other.screen == screen)&&(identical(other.dialog, dialog) || other.dialog == dialog)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,screen,dialog);
+int get hashCode => Object.hash(runtimeType,screen,dialog,currentPage);
 
 @override
 String toString() {
-  return 'HomeState(screen: $screen, dialog: $dialog)';
+  return 'HomeState(screen: $screen, dialog: $dialog, currentPage: $currentPage)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $HomeStateCopyWith<$Res>  {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) = _$HomeStateCopyWithImpl;
 @useResult
 $Res call({
- ScreenState screen, DialogState dialog
+ ScreenState screen, DialogState dialog, int currentPage
 });
 
 
@@ -62,11 +62,12 @@ class _$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? screen = null,Object? dialog = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? screen = null,Object? dialog = null,Object? currentPage = null,}) {
   return _then(_self.copyWith(
 screen: null == screen ? _self.screen : screen // ignore: cast_nullable_to_non_nullable
 as ScreenState,dialog: null == dialog ? _self.dialog : dialog // ignore: cast_nullable_to_non_nullable
-as DialogState,
+as DialogState,currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 /// Create a copy of HomeState
@@ -169,10 +170,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ScreenState screen,  DialogState dialog)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ScreenState screen,  DialogState dialog,  int currentPage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.screen,_that.dialog);case _:
+return $default(_that.screen,_that.dialog,_that.currentPage);case _:
   return orElse();
 
 }
@@ -190,10 +191,10 @@ return $default(_that.screen,_that.dialog);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ScreenState screen,  DialogState dialog)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ScreenState screen,  DialogState dialog,  int currentPage)  $default,) {final _that = this;
 switch (_that) {
 case _HomeState():
-return $default(_that.screen,_that.dialog);case _:
+return $default(_that.screen,_that.dialog,_that.currentPage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -210,10 +211,10 @@ return $default(_that.screen,_that.dialog);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ScreenState screen,  DialogState dialog)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ScreenState screen,  DialogState dialog,  int currentPage)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.screen,_that.dialog);case _:
+return $default(_that.screen,_that.dialog,_that.currentPage);case _:
   return null;
 
 }
@@ -225,11 +226,12 @@ return $default(_that.screen,_that.dialog);case _:
 
 
 class _HomeState implements HomeState {
-  const _HomeState({this.screen = const ScreenState.initial(), this.dialog = const DialogState.idle()});
+  const _HomeState({this.screen = const ScreenState.initial(''), this.dialog = const DialogState.idle(), this.currentPage = 1});
   
 
 @override@JsonKey() final  ScreenState screen;
 @override@JsonKey() final  DialogState dialog;
+@override@JsonKey() final  int currentPage;
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
@@ -241,16 +243,16 @@ _$HomeStateCopyWith<_HomeState> get copyWith => __$HomeStateCopyWithImpl<_HomeSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&(identical(other.screen, screen) || other.screen == screen)&&(identical(other.dialog, dialog) || other.dialog == dialog));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&(identical(other.screen, screen) || other.screen == screen)&&(identical(other.dialog, dialog) || other.dialog == dialog)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,screen,dialog);
+int get hashCode => Object.hash(runtimeType,screen,dialog,currentPage);
 
 @override
 String toString() {
-  return 'HomeState(screen: $screen, dialog: $dialog)';
+  return 'HomeState(screen: $screen, dialog: $dialog, currentPage: $currentPage)';
 }
 
 
@@ -261,7 +263,7 @@ abstract mixin class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Re
   factory _$HomeStateCopyWith(_HomeState value, $Res Function(_HomeState) _then) = __$HomeStateCopyWithImpl;
 @override @useResult
 $Res call({
- ScreenState screen, DialogState dialog
+ ScreenState screen, DialogState dialog, int currentPage
 });
 
 
@@ -278,11 +280,12 @@ class __$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? screen = null,Object? dialog = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? screen = null,Object? dialog = null,Object? currentPage = null,}) {
   return _then(_HomeState(
 screen: null == screen ? _self.screen : screen // ignore: cast_nullable_to_non_nullable
 as ScreenState,dialog: null == dialog ? _self.dialog : dialog // ignore: cast_nullable_to_non_nullable
-as DialogState,
+as DialogState,currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -310,30 +313,61 @@ $DialogStateCopyWith<$Res> get dialog {
 /// @nodoc
 mixin _$ScreenState {
 
-
+ String get word;
+/// Create a copy of ScreenState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ScreenStateCopyWith<ScreenState> get copyWith => _$ScreenStateCopyWithImpl<ScreenState>(this as ScreenState, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScreenState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScreenState&&(identical(other.word, word) || other.word == word));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,word);
 
 @override
 String toString() {
-  return 'ScreenState()';
+  return 'ScreenState(word: $word)';
 }
 
 
 }
 
 /// @nodoc
-class $ScreenStateCopyWith<$Res>  {
-$ScreenStateCopyWith(ScreenState _, $Res Function(ScreenState) __);
+abstract mixin class $ScreenStateCopyWith<$Res>  {
+  factory $ScreenStateCopyWith(ScreenState value, $Res Function(ScreenState) _then) = _$ScreenStateCopyWithImpl;
+@useResult
+$Res call({
+ String word
+});
+
+
+
+
+}
+/// @nodoc
+class _$ScreenStateCopyWithImpl<$Res>
+    implements $ScreenStateCopyWith<$Res> {
+  _$ScreenStateCopyWithImpl(this._self, this._then);
+
+  final ScreenState _self;
+  final $Res Function(ScreenState) _then;
+
+/// Create a copy of ScreenState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? word = null,}) {
+  return _then(_self.copyWith(
+word: null == word ? _self.word : word // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
 }
 
 
@@ -351,13 +385,14 @@ extension ScreenStatePatterns on ScreenState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ScreenInitial value)?  initial,TResult Function( ScreenLoading value)?  loading,TResult Function( ScreenSuccess value)?  success,TResult Function( ScreenError value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ScreenInitial value)?  initial,TResult Function( ScreenLoading value)?  loading,TResult Function( ScreenSuccess value)?  success,TResult Function( ScreenLoadingMore value)?  loadingMore,TResult Function( ScreenError value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ScreenInitial() when initial != null:
 return initial(_that);case ScreenLoading() when loading != null:
 return loading(_that);case ScreenSuccess() when success != null:
-return success(_that);case ScreenError() when error != null:
+return success(_that);case ScreenLoadingMore() when loadingMore != null:
+return loadingMore(_that);case ScreenError() when error != null:
 return error(_that);case _:
   return orElse();
 
@@ -376,13 +411,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ScreenInitial value)  initial,required TResult Function( ScreenLoading value)  loading,required TResult Function( ScreenSuccess value)  success,required TResult Function( ScreenError value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ScreenInitial value)  initial,required TResult Function( ScreenLoading value)  loading,required TResult Function( ScreenSuccess value)  success,required TResult Function( ScreenLoadingMore value)  loadingMore,required TResult Function( ScreenError value)  error,}){
 final _that = this;
 switch (_that) {
 case ScreenInitial():
 return initial(_that);case ScreenLoading():
 return loading(_that);case ScreenSuccess():
-return success(_that);case ScreenError():
+return success(_that);case ScreenLoadingMore():
+return loadingMore(_that);case ScreenError():
 return error(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
@@ -397,13 +433,14 @@ return error(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ScreenInitial value)?  initial,TResult? Function( ScreenLoading value)?  loading,TResult? Function( ScreenSuccess value)?  success,TResult? Function( ScreenError value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ScreenInitial value)?  initial,TResult? Function( ScreenLoading value)?  loading,TResult? Function( ScreenSuccess value)?  success,TResult? Function( ScreenLoadingMore value)?  loadingMore,TResult? Function( ScreenError value)?  error,}){
 final _that = this;
 switch (_that) {
 case ScreenInitial() when initial != null:
 return initial(_that);case ScreenLoading() when loading != null:
 return loading(_that);case ScreenSuccess() when success != null:
-return success(_that);case ScreenError() when error != null:
+return success(_that);case ScreenLoadingMore() when loadingMore != null:
+return loadingMore(_that);case ScreenError() when error != null:
 return error(_that);case _:
   return null;
 
@@ -421,13 +458,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<Movie> results)?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String word)?  initial,TResult Function( String word)?  loading,TResult Function( List<Movie> results,  String word,  bool hasNext)?  success,TResult Function( List<Movie> results,  String word)?  loadingMore,TResult Function( String message,  String word)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ScreenInitial() when initial != null:
-return initial();case ScreenLoading() when loading != null:
-return loading();case ScreenSuccess() when success != null:
-return success(_that.results);case ScreenError() when error != null:
-return error(_that.message);case _:
+return initial(_that.word);case ScreenLoading() when loading != null:
+return loading(_that.word);case ScreenSuccess() when success != null:
+return success(_that.results,_that.word,_that.hasNext);case ScreenLoadingMore() when loadingMore != null:
+return loadingMore(_that.results,_that.word);case ScreenError() when error != null:
+return error(_that.message,_that.word);case _:
   return orElse();
 
 }
@@ -445,13 +483,14 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<Movie> results)  success,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String word)  initial,required TResult Function( String word)  loading,required TResult Function( List<Movie> results,  String word,  bool hasNext)  success,required TResult Function( List<Movie> results,  String word)  loadingMore,required TResult Function( String message,  String word)  error,}) {final _that = this;
 switch (_that) {
 case ScreenInitial():
-return initial();case ScreenLoading():
-return loading();case ScreenSuccess():
-return success(_that.results);case ScreenError():
-return error(_that.message);}
+return initial(_that.word);case ScreenLoading():
+return loading(_that.word);case ScreenSuccess():
+return success(_that.results,_that.word,_that.hasNext);case ScreenLoadingMore():
+return loadingMore(_that.results,_that.word);case ScreenError():
+return error(_that.message,_that.word);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -465,13 +504,14 @@ return error(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<Movie> results)?  success,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String word)?  initial,TResult? Function( String word)?  loading,TResult? Function( List<Movie> results,  String word,  bool hasNext)?  success,TResult? Function( List<Movie> results,  String word)?  loadingMore,TResult? Function( String message,  String word)?  error,}) {final _that = this;
 switch (_that) {
 case ScreenInitial() when initial != null:
-return initial();case ScreenLoading() when loading != null:
-return loading();case ScreenSuccess() when success != null:
-return success(_that.results);case ScreenError() when error != null:
-return error(_that.message);case _:
+return initial(_that.word);case ScreenLoading() when loading != null:
+return loading(_that.word);case ScreenSuccess() when success != null:
+return success(_that.results,_that.word,_that.hasNext);case ScreenLoadingMore() when loadingMore != null:
+return loadingMore(_that.results,_that.word);case ScreenError() when error != null:
+return error(_that.message,_that.word);case _:
   return null;
 
 }
@@ -483,71 +523,139 @@ return error(_that.message);case _:
 
 
 class ScreenInitial implements ScreenState {
-  const ScreenInitial();
+  const ScreenInitial(this.word);
   
 
+@override final  String word;
 
-
+/// Create a copy of ScreenState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ScreenInitialCopyWith<ScreenInitial> get copyWith => _$ScreenInitialCopyWithImpl<ScreenInitial>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScreenInitial);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScreenInitial&&(identical(other.word, word) || other.word == word));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,word);
 
 @override
 String toString() {
-  return 'ScreenState.initial()';
+  return 'ScreenState.initial(word: $word)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $ScreenInitialCopyWith<$Res> implements $ScreenStateCopyWith<$Res> {
+  factory $ScreenInitialCopyWith(ScreenInitial value, $Res Function(ScreenInitial) _then) = _$ScreenInitialCopyWithImpl;
+@override @useResult
+$Res call({
+ String word
+});
 
 
+
+
+}
+/// @nodoc
+class _$ScreenInitialCopyWithImpl<$Res>
+    implements $ScreenInitialCopyWith<$Res> {
+  _$ScreenInitialCopyWithImpl(this._self, this._then);
+
+  final ScreenInitial _self;
+  final $Res Function(ScreenInitial) _then;
+
+/// Create a copy of ScreenState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? word = null,}) {
+  return _then(ScreenInitial(
+null == word ? _self.word : word // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 /// @nodoc
 
 
 class ScreenLoading implements ScreenState {
-  const ScreenLoading();
+  const ScreenLoading(this.word);
   
 
+@override final  String word;
 
-
+/// Create a copy of ScreenState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ScreenLoadingCopyWith<ScreenLoading> get copyWith => _$ScreenLoadingCopyWithImpl<ScreenLoading>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScreenLoading);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScreenLoading&&(identical(other.word, word) || other.word == word));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,word);
 
 @override
 String toString() {
-  return 'ScreenState.loading()';
+  return 'ScreenState.loading(word: $word)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $ScreenLoadingCopyWith<$Res> implements $ScreenStateCopyWith<$Res> {
+  factory $ScreenLoadingCopyWith(ScreenLoading value, $Res Function(ScreenLoading) _then) = _$ScreenLoadingCopyWithImpl;
+@override @useResult
+$Res call({
+ String word
+});
 
 
+
+
+}
+/// @nodoc
+class _$ScreenLoadingCopyWithImpl<$Res>
+    implements $ScreenLoadingCopyWith<$Res> {
+  _$ScreenLoadingCopyWithImpl(this._self, this._then);
+
+  final ScreenLoading _self;
+  final $Res Function(ScreenLoading) _then;
+
+/// Create a copy of ScreenState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? word = null,}) {
+  return _then(ScreenLoading(
+null == word ? _self.word : word // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 /// @nodoc
 
 
 class ScreenSuccess implements ScreenState {
-  const ScreenSuccess({required final  List<Movie> results}): _results = results;
+  const ScreenSuccess({required final  List<Movie> results, required this.word, this.hasNext = true}): _results = results;
   
 
  final  List<Movie> _results;
@@ -557,10 +665,12 @@ class ScreenSuccess implements ScreenState {
   return EqualUnmodifiableListView(_results);
 }
 
+@override final  String word;
+@JsonKey() final  bool hasNext;
 
 /// Create a copy of ScreenState
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $ScreenSuccessCopyWith<ScreenSuccess> get copyWith => _$ScreenSuccessCopyWithImpl<ScreenSuccess>(this, _$identity);
 
@@ -568,16 +678,16 @@ $ScreenSuccessCopyWith<ScreenSuccess> get copyWith => _$ScreenSuccessCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScreenSuccess&&const DeepCollectionEquality().equals(other._results, _results));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScreenSuccess&&const DeepCollectionEquality().equals(other._results, _results)&&(identical(other.word, word) || other.word == word)&&(identical(other.hasNext, hasNext) || other.hasNext == hasNext));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_results));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_results),word,hasNext);
 
 @override
 String toString() {
-  return 'ScreenState.success(results: $results)';
+  return 'ScreenState.success(results: $results, word: $word, hasNext: $hasNext)';
 }
 
 
@@ -586,9 +696,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $ScreenSuccessCopyWith<$Res> implements $ScreenStateCopyWith<$Res> {
   factory $ScreenSuccessCopyWith(ScreenSuccess value, $Res Function(ScreenSuccess) _then) = _$ScreenSuccessCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- List<Movie> results
+ List<Movie> results, String word, bool hasNext
 });
 
 
@@ -605,10 +715,86 @@ class _$ScreenSuccessCopyWithImpl<$Res>
 
 /// Create a copy of ScreenState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? results = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? results = null,Object? word = null,Object? hasNext = null,}) {
   return _then(ScreenSuccess(
 results: null == results ? _self._results : results // ignore: cast_nullable_to_non_nullable
-as List<Movie>,
+as List<Movie>,word: null == word ? _self.word : word // ignore: cast_nullable_to_non_nullable
+as String,hasNext: null == hasNext ? _self.hasNext : hasNext // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ScreenLoadingMore implements ScreenState {
+  const ScreenLoadingMore({required final  List<Movie> results, required this.word}): _results = results;
+  
+
+ final  List<Movie> _results;
+ List<Movie> get results {
+  if (_results is EqualUnmodifiableListView) return _results;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_results);
+}
+
+@override final  String word;
+
+/// Create a copy of ScreenState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ScreenLoadingMoreCopyWith<ScreenLoadingMore> get copyWith => _$ScreenLoadingMoreCopyWithImpl<ScreenLoadingMore>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScreenLoadingMore&&const DeepCollectionEquality().equals(other._results, _results)&&(identical(other.word, word) || other.word == word));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_results),word);
+
+@override
+String toString() {
+  return 'ScreenState.loadingMore(results: $results, word: $word)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ScreenLoadingMoreCopyWith<$Res> implements $ScreenStateCopyWith<$Res> {
+  factory $ScreenLoadingMoreCopyWith(ScreenLoadingMore value, $Res Function(ScreenLoadingMore) _then) = _$ScreenLoadingMoreCopyWithImpl;
+@override @useResult
+$Res call({
+ List<Movie> results, String word
+});
+
+
+
+
+}
+/// @nodoc
+class _$ScreenLoadingMoreCopyWithImpl<$Res>
+    implements $ScreenLoadingMoreCopyWith<$Res> {
+  _$ScreenLoadingMoreCopyWithImpl(this._self, this._then);
+
+  final ScreenLoadingMore _self;
+  final $Res Function(ScreenLoadingMore) _then;
+
+/// Create a copy of ScreenState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? results = null,Object? word = null,}) {
+  return _then(ScreenLoadingMore(
+results: null == results ? _self._results : results // ignore: cast_nullable_to_non_nullable
+as List<Movie>,word: null == word ? _self.word : word // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -619,14 +805,15 @@ as List<Movie>,
 
 
 class ScreenError implements ScreenState {
-  const ScreenError({required this.message});
+  const ScreenError({required this.message, required this.word});
   
 
  final  String message;
+@override final  String word;
 
 /// Create a copy of ScreenState
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $ScreenErrorCopyWith<ScreenError> get copyWith => _$ScreenErrorCopyWithImpl<ScreenError>(this, _$identity);
 
@@ -634,16 +821,16 @@ $ScreenErrorCopyWith<ScreenError> get copyWith => _$ScreenErrorCopyWithImpl<Scre
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScreenError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScreenError&&(identical(other.message, message) || other.message == message)&&(identical(other.word, word) || other.word == word));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,message,word);
 
 @override
 String toString() {
-  return 'ScreenState.error(message: $message)';
+  return 'ScreenState.error(message: $message, word: $word)';
 }
 
 
@@ -652,9 +839,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $ScreenErrorCopyWith<$Res> implements $ScreenStateCopyWith<$Res> {
   factory $ScreenErrorCopyWith(ScreenError value, $Res Function(ScreenError) _then) = _$ScreenErrorCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- String message
+ String message, String word
 });
 
 
@@ -671,9 +858,10 @@ class _$ScreenErrorCopyWithImpl<$Res>
 
 /// Create a copy of ScreenState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? message = null,Object? word = null,}) {
   return _then(ScreenError(
 message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,word: null == word ? _self.word : word // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

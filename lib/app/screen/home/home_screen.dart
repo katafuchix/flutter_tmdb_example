@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/widget/custom_error_widget.dart';
@@ -21,7 +22,6 @@ class HomePageState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //BlocProvider.of<HomeCubit>(context).fetchMovies();
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -37,25 +37,55 @@ class HomePageState extends State<HomeScreen> {
 
   Widget _homePageBody() {
     return BlocConsumer<HomeCubit, HomeState>(
-      listener: (context, state) {},
+      listenWhen: (previous, current) =>
+          previous.screen != current.screen ||
+          previous.dialog != current.dialog,
+      listener: (context, state) {
+        if (state.screen is ScreenLoading ||
+            state.screen is ScreenLoadingMore) {
+          SmartDialog.showLoading(msg: 'Loading...');
+        } else {
+          SmartDialog.dismiss();
+        }
+      },
       builder: (context, state) {
         return state.screen.when(
-          initial: () => const CustomLoadingIndicator(),
-          loading: () => const CustomLoadingIndicator(),
-          // Listener が Loading を出すので空でOK
-          error: (message) =>
+          initial: (_) => const CustomLoadingIndicator(),
+          loading: (_) => const CustomLoadingIndicator(),
+          error: (message, _) =>
               Center(child: CustomErrorWidget(errMessage: message)),
-          success: (results) => LayoutBuilder(
-            builder: (context, constraints) {
-              return results.isNotEmpty
-                  ? Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: RefreshIndicator(
-                        color: Colors.red,
-                        onRefresh: () async {
-                          context.read<HomeCubit>().fetchMovies();
-                        },
-                        child: SingleChildScrollView(
+          success: (results, _, _) => _buildGridView(context, results),
+          loadingMore: (results, _) => _buildGridView(context, results),
+        );
+      },
+    );
+  }
+
+  Widget _buildGridView(BuildContext context, List<Movie> results) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return results.isNotEmpty
+              ? Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: RefreshIndicator(
+                    color: Colors.red,
+                    onRefresh: () async {
+                      context.read<HomeCubit>().fetchMovies();
+                    },
+                    child: NotificationListener<ScrollNotification>(
+                      onNotification: (ScrollNotification scrollInfo) {
+                        FocusScope.of(context).unfocus();
+                        // スクロールが一番下（の90%くらい）に来たら次を読み込む
+                        if (scrollInfo.metrics.pixels >=
+                            scrollInfo.metrics.maxScrollExtent * 0.9) {
+                          context.read<HomeCubit>().loadNextPage();
+                        }
+                        return true;
+                      },
+                      child: SingleChildScrollView(
                         child: StaggeredGrid.count(
                           crossAxisCount: constraints.maxWidth > 900 ? 5 : 3,
                           mainAxisSpacing: 0,
@@ -65,12 +95,12 @@ class HomePageState extends State<HomeScreen> {
                               .toList(),
                         ),
                       ),
-                    ),)
-                  : Center(child: Text("Data is empty!"));
-            },
-          ),
-        );
-      },
+                    ),
+                  ),
+                )
+              : Center(child: Text("Data is empty!"));
+        },
+      ),
     );
   }
 
@@ -78,6 +108,7 @@ class HomePageState extends State<HomeScreen> {
     return MovieListItem(
       movie: movie,
       onTap: () {
+        FocusScope.of(context).unfocus();
         context.push('/detail', extra: movie);
       },
     );
@@ -116,6 +147,7 @@ class HomePageState extends State<HomeScreen> {
     final cubit = context.read<HomeCubit>();
 
     if (query.isNotEmpty || query != "") {
+      cubit.setSearchWord(query);
       cubit.searchMovies(query: query);
     } else {
       cubit.fetchMovies();

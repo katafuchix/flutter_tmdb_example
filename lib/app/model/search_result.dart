@@ -10,8 +10,8 @@ part 'search_result.g.dart';
 abstract class SearchResult with _$SearchResult {
   const factory SearchResult({
     required int page,
-    int? totalPages,
-    int? totalResults,
+    @JsonKey(name: "total_pages") required int totalPages,
+    @JsonKey(name: "total_results") required int totalResults,
     required List<Movie> results,
   }) = _SearchResult;
 

@@ -12,14 +12,25 @@ class TmdbRepositoryImpl implements TmdbRepository {
   TmdbRepositoryImpl(this._apiService);
 
   @override
-  Future<List<Movie>> fetchMovies() async {
-    final data = await _apiService.get(endPoint: "discover/movie");
+  Future<List<Movie>> fetchMovies({int page = 1}) async {
+    //final data = await _apiService.get(endPoint: "discover/movie");
+    final data = await _apiService.get(
+      endPoint: "trending/movie/week",
+      page: page,
+    );
     return SearchResult.fromJson(data).results;
   }
 
   @override
-  Future<List<Movie>> searchMovies({required String query}) async {
-    final data = await _apiService.get(endPoint: "search/movie", query: query);
+  Future<List<Movie>> searchMovies({
+    required String query,
+    int page = 1,
+  }) async {
+    final data = await _apiService.get(
+      endPoint: "search/movie",
+      page: page,
+      query: query,
+    );
     return SearchResult.fromJson(data).results;
   }
 }

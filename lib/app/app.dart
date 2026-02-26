@@ -35,7 +35,6 @@ class _MyAppState extends State<MyApp> {
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           theme: ThemeData.dark(),
-          routerConfig: Routers.router,
           // アプリ全体の描画空間をカスタマイズする場所
           builder: (context, child) {
             // 1. まず BotToast でラップする
@@ -48,6 +47,7 @@ class _MyAppState extends State<MyApp> {
 
             return child;
           },
+          routerConfig: Routers.router,
         ),
       ),
     );

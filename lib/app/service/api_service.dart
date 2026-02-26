@@ -13,11 +13,12 @@ class ApiService {
 
   Future<Map<String, dynamic>> get({
     required String endPoint,
+    int page = 1,
     String? query,
   }) async {
     var parameters = query != null
-        ? {"api_key": _apiKey, "query": query}
-        : {"api_key": _apiKey};
+        ? {"api_key": _apiKey, "page": page, "query": query}
+        : {"api_key": _apiKey, "page": page};
 
     var response = await dio.get(
       '$_basUrl$endPoint',

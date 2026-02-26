@@ -9,8 +9,8 @@ part of 'search_result.dart';
 _SearchResult _$SearchResultFromJson(Map<String, dynamic> json) =>
     _SearchResult(
       page: (json['page'] as num).toInt(),
-      totalPages: (json['totalPages'] as num?)?.toInt(),
-      totalResults: (json['totalResults'] as num?)?.toInt(),
+      totalPages: (json['total_pages'] as num).toInt(),
+      totalResults: (json['total_results'] as num).toInt(),
       results: (json['results'] as List<dynamic>)
           .map((e) => Movie.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -19,7 +19,7 @@ _SearchResult _$SearchResultFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$SearchResultToJson(_SearchResult instance) =>
     <String, dynamic>{
       'page': instance.page,
-      'totalPages': instance.totalPages,
-      'totalResults': instance.totalResults,
+      'total_pages': instance.totalPages,
+      'total_results': instance.totalResults,
       'results': instance.results,
     };

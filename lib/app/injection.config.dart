@@ -38,7 +38,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i942.ApiService>(
       () => _i942.ApiService(dio: gh<_i361.Dio>()),
     );
-    gh.singleton<_i247.TmdbRepositoryImpl>(
+    gh.factory<_i721.TmdbRepository>(
       () => _i247.TmdbRepositoryImpl(gh<_i942.ApiService>()),
     );
     gh.factory<_i955.HomeCubit>(

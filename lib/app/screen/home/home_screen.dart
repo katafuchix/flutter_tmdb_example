@@ -141,7 +141,8 @@ class HomePageState extends State<HomeScreen> {
                 hintText: 'Search movie...',
                 border: InputBorder.none,
               ),
-              onChanged: _onSearchTextChanged,
+              //onChanged: _onSearchTextChanged,
+              onSubmitted: _onSearchTextChanged,
             ),
             trailing: IconButton(
               icon: Icon(Icons.clear, color: Colors.grey),

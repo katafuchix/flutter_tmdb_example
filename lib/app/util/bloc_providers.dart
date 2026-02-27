@@ -9,7 +9,7 @@ List<BlocProvider> buildListProviders({required GetIt locator}) {
   return [
     BlocProvider<NetworkCubit>(create: (context) => locator<NetworkCubit>()),
     BlocProvider<HomeCubit>(
-      create: (context) => HomeCubit(locator<TmdbRepositoryImpl>())
+      create: (context) => locator<HomeCubit>()
         ..setSearchWord('')
         ..fetchMovies(),
     ),

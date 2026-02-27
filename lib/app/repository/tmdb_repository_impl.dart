@@ -5,7 +5,7 @@ import '../service/api_service.dart';
 import '../model/movie.dart';
 import 'tmdb_repository.dart';
 
-@singleton
+@Injectable(as: TmdbRepository)
 class TmdbRepositoryImpl implements TmdbRepository {
   final ApiService _apiService;
 

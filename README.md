@@ -1,17 +1,7 @@
 # flutter_tmdb_example
 
-A new Flutter project.
+<div>
+<img src="https://github.com/user-attachments/assets/dfcf8566-a6f1-4cd5-974c-207524d0ea8c" width="320">
+<img src="https://github.com/user-attachments/assets/e347b341-32f0-4445-806f-33f44e5396a6" width="320">  
+</div>
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# flutter_tmdb_example

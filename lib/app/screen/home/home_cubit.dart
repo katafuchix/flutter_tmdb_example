@@ -95,14 +95,14 @@ class HomeCubit extends Cubit<HomeState> {
     if (currentScreen is! ScreenSuccess || !currentScreen.hasNext) return;
 
     final previousResults = currentScreen.results;
-    final _currentWord = currentScreen.word;
+    final currentWord = currentScreen.word;
 
     // 状態を「次ページ読み込み中」に変更（今あるリストを保持したまま）
     emit(
       state.copyWith(
         screen: ScreenState.loadingMore(
           results: previousResults,
-          word: _currentWord,
+          word: currentWord,
         ),
       ),
     );
@@ -110,9 +110,9 @@ class HomeCubit extends Cubit<HomeState> {
     //await Future.delayed(Duration(seconds: 3));
     try {
       final nextPage = state.currentPage + 1; // 状態から計算
-      final newResults = (_currentWord == '')
+      final newResults = (currentWord == '')
           ? await _repository.fetchMovies(page: nextPage)
-          : await _repository.searchMovies(query: _currentWord, page: nextPage);
+          : await _repository.searchMovies(query: currentWord, page: nextPage);
 
       emit(
         state.copyWith(
@@ -122,7 +122,7 @@ class HomeCubit extends Cubit<HomeState> {
               ...previousResults,
               ...newResults,
             ], // Swiftの array + array
-            word: _currentWord,
+            word: currentWord,
             hasNext: newResults.isNotEmpty, // 取得件数が空なら次はなし
           ),
         ),
@@ -133,7 +133,7 @@ class HomeCubit extends Cubit<HomeState> {
         state.copyWith(
           screen: ScreenState.success(
             results: previousResults,
-            word: _currentWord,
+            word: currentWord,
           ),
         ),
       );

@@ -24,6 +24,7 @@ class ApiService {
       '$_basUrl$endPoint',
       queryParameters: parameters,
     );
+    print(response.realUri);
 
     // response.dataがStringで返ってきた場合を考慮してパースする
     if (response.data is String) {
